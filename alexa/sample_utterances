@@ -6,3 +6,5 @@ OpenFileIntent open {function|file_name} file
 OpenFileIntent open {lambda|file_name} file
 OpenFileIntent open {pom|file_name} file
 OpenFileIntent open {modules|file_name} file
+CommentLineIntent comment line {line_number}
+CommentLineIntent please comment line {line_number}
