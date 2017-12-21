@@ -9,6 +9,12 @@ OpenFileIntent open {modules|file_name} file
 
 CommentLineIntent comment line {line_number}
 CommentLineIntent please comment line {line_number}
+CommentLinesIntent comment lines {line_number_1} through {line_number_2}
+CommentLinesIntent please comment lines {line_number_1} through {line_number_2}
+CommentLinesIntent comment between lines {line_number_1} and {line_number_2}
+CommentLinesIntent please comment between lines {line_number_1} and {line_number_2}
 
 DeleteLineIntent delete line {line_number}
 DeleteLineIntent please delete line {line_number}
+DeleteLinesIntent delete lines {line_number_1} through {line_number_2}
+DeleteLinesIntent please delete lines {line_number_1} through {line_number_2}

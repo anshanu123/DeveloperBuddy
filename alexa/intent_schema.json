@@ -19,10 +19,36 @@
       ]
     },
     {
+      "intent": "CommentLinesIntent",
+      "slots": [
+        {
+          "name": "line_number_1",
+          "type": "AMAZON.NUMBER"
+        },
+        {
+          "name": "line_number_2",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
       "intent": "DeleteLineIntent",
       "slots": [
         {
           "name": "line_number",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "DeleteLinesIntent",
+      "slots": [
+        {
+          "name": "line_number_1",
+          "type": "AMAZON.NUMBER"
+        },
+        {
+          "name": "line_number_2",
           "type": "AMAZON.NUMBER"
         }
       ]
