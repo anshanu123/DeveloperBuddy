@@ -19,6 +19,15 @@
       ]
     },
     {
+      "intent": "DeleteLineIntent",
+      "slots": [
+        {
+          "name": "line_number",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
       "intent": "AMAZON.HelpIntent"
     }
   ]
