@@ -25,3 +25,9 @@ DeleteLineIntent delete line {line_number}
 DeleteLineIntent please delete line {line_number}
 DeleteLinesIntent delete lines {line_number_1} through {line_number_2}
 DeleteLinesIntent please delete lines {line_number_1} through {line_number_2}
+
+RedoIntent redo
+RedoIntent please redo
+
+UndoIntent undo
+UndoIntent please undo
