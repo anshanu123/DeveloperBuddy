@@ -14,6 +14,13 @@ CommentLinesIntent please comment lines {line_number_1} through {line_number_2}
 CommentLinesIntent comment between lines {line_number_1} and {line_number_2}
 CommentLinesIntent please comment between lines {line_number_1} and {line_number_2}
 
+UncommentLineIntent uncomment line {line_number}
+UncommentLineIntent please uncomment line {line_number}
+UncommentLinesIntent uncomment lines {line_number_1} through {line_number_2}
+UncommentLinesIntent please uncomment lines {line_number_1} through {line_number_2}
+UncommentLinesIntent uncomment between lines {line_number_1} and {line_number_2}
+UncommentLinesIntent please uncomment between lines {line_number_1} and {line_number_2}
+
 DeleteLineIntent delete line {line_number}
 DeleteLineIntent please delete line {line_number}
 DeleteLinesIntent delete lines {line_number_1} through {line_number_2}

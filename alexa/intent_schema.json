@@ -32,6 +32,28 @@
       ]
     },
     {
+      "intent": "UncommentLineIntent",
+      "slots": [
+        {
+          "name": "line_number",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "UncommentLinesIntent",
+      "slots": [
+        {
+          "name": "line_number_1",
+          "type": "AMAZON.NUMBER"
+        },
+        {
+          "name": "line_number_2",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
       "intent": "DeleteLineIntent",
       "slots": [
         {
