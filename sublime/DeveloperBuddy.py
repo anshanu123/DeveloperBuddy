@@ -11,7 +11,7 @@ class ExampleCommand(sublime_plugin.TextCommand):
        unload_handler()
 
 def commentLineHandler(request_form):
-    line = request.form['line']
+    line = request_form['line']
     print("got here")
     #sublime edit line
 
@@ -38,10 +38,19 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
+        
         post_data = self.rfile.read(content_length)
         data = json.loads(post_data.decode("utf-8"))
-        print(data["key"])
+        command = data["command"]
+        params = data["params"]
+        
+        processing_entry = processing_dict[command]
+        callback = processing_entry["callback"](params)
+
+        # response        
         self.send_response(200)
+        self.send_header('Content-type','text/html')
+        self.end_headers()
         self.wfile.write(bytes("done", "utf8"))
         return
 
