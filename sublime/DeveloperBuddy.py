@@ -1,10 +1,14 @@
 import sublime, sublime_plugin
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from threading import Thread
-import cgi
+import json
 #from flask import Flask, request, redirect
 
 #app = Flask(__name__)
+
+class ExampleCommand(sublime_plugin.TextCommand):
+   def run(self, view):
+       unload_handler()
 
 def commentLineHandler(request_form):
     line = request.form['line']
@@ -14,23 +18,6 @@ def commentLineHandler(request_form):
 processing_dict = {
     "commentLine": {"params":["line"], "callback":commentLineHandler}
 }
-
-#@app.route('/alexa', methods=['POST'])
-def alexa():
-    """processing handle for alexa app"""
-    command = request.form['command'] #ex. comment, delete
-    callback = processing_dict[command]["callback"]
-    callback(request.form)
-    #line = request.form['line']
-    #line_start = request.form['line_start']
-    #line_end = request.form['line_end']
-    #list_name = request.form['list_name']
-    return "success"
-
-
-class ExampleCommand(sublime_plugin.TextCommand):
-   def run(self, view):
-       unload_handler()
 
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
  
@@ -50,15 +37,13 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         return
 
     def do_POST(self):
-        ctype, pdict = cgi.parse_header(self.headers.getheader('content-type'))
-        if ctype == 'multipart/form-data':
-            postvars = cgi.parse_multipart(self.rfile, pdict)
-        elif ctype == 'application/x-www-form-urlencoded':
-            length = int(self.headers.getheader('content-length'))
-            postvars = cgi.parse_qs(self.rfile.read(length), keep_blank_values=1)
-        else:
-            postvars = {}
-        print(postvars)
+        content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
+        post_data = self.rfile.read(content_length)
+        data = json.loads(post_data.decode("utf-8"))
+        print(data["key"])
+        self.send_response(200)
+        self.wfile.write(bytes("done", "utf8"))
+        return
 
 
 def start_server():
