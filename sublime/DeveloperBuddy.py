@@ -1,6 +1,7 @@
 import sublime, sublime_plugin
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from threading import Thread
+import cgi
 #from flask import Flask, request, redirect
 
 #app = Flask(__name__)
@@ -27,14 +28,14 @@ def alexa():
     return "success"
 
 
-#class ExampleCommand(sublime_plugin.TextCommand):
-#   def run(self, edit):
-#       self.view.insert(edit, 0, "Hello, World!")
+class ExampleCommand(sublime_plugin.TextCommand):
+   def run(self, view):
+       unload_handler()
 
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
  
   # GET
-  def do_GET(self):
+    def do_GET(self):
         # Send response status code
         self.send_response(200)
  
@@ -48,8 +49,27 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(bytes(message, "utf8"))
         return
 
+    def do_POST(self):
+        ctype, pdict = cgi.parse_header(self.headers.getheader('content-type'))
+        if ctype == 'multipart/form-data':
+            postvars = cgi.parse_multipart(self.rfile, pdict)
+        elif ctype == 'application/x-www-form-urlencoded':
+            length = int(self.headers.getheader('content-length'))
+            postvars = cgi.parse_qs(self.rfile.read(length), keep_blank_values=1)
+        else:
+            postvars = {}
+        print(postvars)
+
+
 def start_server():
     server.serve_forever()
+
+def unload_handler():
+    global server
+    print('Killing server...')
+    if server:
+        server.shutdown()
+        server.server_close()
 
 def plugin_loaded():
     """Called at the start of the sublime plugin"""
