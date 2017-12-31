@@ -10,9 +10,10 @@ class ExampleCommand(sublime_plugin.TextCommand):
    def run(self, view):
        unload_handler()
 
-def commentLineHandler(request_form):
-    line = request_form['line']
-    print("got here")
+def commentLineHandler(params):
+    line = int(params["line"])
+
+    print("done")
     #sublime edit line
 
 processing_dict = {
@@ -31,7 +32,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
  
         # Send message back to client
-        message = "Hello world!"
+        message = "Running!"
         # Write content as utf-8 data
         self.wfile.write(bytes(message, "utf8"))
         return
@@ -75,9 +76,9 @@ def plugin_loaded():
  
     # Server settings
     # Choose port 8080, for port 80, which is normally used for a http server, you need root access
-    server_address = ('127.0.0.1', 8081)
+    server_address = ('0.0.0.0', 8081)
     server = HTTPServer(server_address, testHTTPServer_RequestHandler)
-    print('running server...')
+    sublime.message_dialog('Running DeveloperBuddy Server on port 8081')
     Thread(target=start_server, args=[]).start()
     #httpd.serve_forever()
 
