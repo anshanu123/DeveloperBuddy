@@ -1,5 +1,5 @@
 # DeveloperBuddy
-Amazon Alexa Skill to Assist in the Generation of Code
+Amazon Alexa Skill to Assist in the generation of code. Currently supports python only. 
 
 ## Possible Queries
 - **Alexa, comment line <line_number>**
