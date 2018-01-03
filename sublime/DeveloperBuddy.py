@@ -10,9 +10,19 @@ class ExampleCommand(sublime_plugin.TextCommand):
    def run(self, view):
        unload_handler()
 
+class InsertCommand(sublime_plugin.TextCommand):
+    def run(self, edit, pos, text):
+        print('got here')
+        self.view.insert(edit, pos, text)
+
 def commentLineHandler(params):
     line = int(params["line"])
-
+    view = sublime.active_window().active_view()
+    print(sublime.active_window())
+    print(sublime.active_window().active_view())
+    #edit = view.begin_edit()
+    #view.insert(edit, line, "#")
+    view.run_command('insert', {'pos': line, 'text': '#'})
     print("done")
     #sublime edit line
 
@@ -78,7 +88,8 @@ def plugin_loaded():
     # Choose port 8080, for port 80, which is normally used for a http server, you need root access
     server_address = ('0.0.0.0', 8081)
     server = HTTPServer(server_address, testHTTPServer_RequestHandler)
-    sublime.message_dialog('Running DeveloperBuddy Server on port 8081')
+    #sublime.message_dialog('Running DeveloperBuddy Server on port 8081')
+    print('Running DeveloperBuddy Server on port 8081')
     Thread(target=start_server, args=[]).start()
     #httpd.serve_forever()
 
