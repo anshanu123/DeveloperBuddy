@@ -18,7 +18,11 @@ class InsertingCommand(sublime_plugin.ApplicationCommand):
         #jobEdit = jobView.begin_edit()
         #print(jobEdit)
         #jobView.insert(edit, 0, 'Hello')
-        jobView.run_command("insert", {"pos":0,"characters":"Hello"})
+        target_region = sublime.Region(pos, pos)
+        jobView.sel().clear()
+        jobView.sel().add(target_region)
+
+        jobView.run_command("insert", {"pos":0,"characters":text})
         #jobView.end_edit(jobEdit)
 
 def commentLineHandler(params):
