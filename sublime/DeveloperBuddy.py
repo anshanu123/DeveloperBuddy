@@ -10,10 +10,16 @@ class ExampleCommand(sublime_plugin.TextCommand):
    def run(self, view):
        unload_handler()
 
-class InsertCommand(sublime_plugin.TextCommand):
-    def run(self, edit, pos, text):
+class InsertingCommand(sublime_plugin.ApplicationCommand):
+    def run(self, pos, text):
         print('got here')
-        self.view.insert(edit, pos, text)
+        jobView = sublime.active_window().active_view()
+        print(jobView)
+        #jobEdit = jobView.begin_edit()
+        #print(jobEdit)
+        #jobView.insert(edit, 0, 'Hello')
+        jobView.run_command("insert", {"pos":0,"characters":"Hello"})
+        #jobView.end_edit(jobEdit)
 
 def commentLineHandler(params):
     line = int(params["line"])
