@@ -27,13 +27,7 @@ class InsertingCommand(sublime_plugin.ApplicationCommand):
         #jobView.end_edit(jobEdit)
 
 def commentLineHandler(params):
-    line = int(params["line"])
-    view = sublime.active_window().active_view()
-    print(sublime.active_window())
-    print(sublime.active_window().active_view())
-    #edit = view.begin_edit()
-    #view.insert(edit, line, "#")
-    view.run_command('insert', {'pos': line, 'text': '#'})
+    sublime.run_command("inserting", {"pos":params["line"], "text": "#"})
     print("done")
     #sublime edit line
 
