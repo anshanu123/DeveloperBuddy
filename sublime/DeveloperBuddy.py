@@ -19,9 +19,10 @@ class InsertingCommand(sublime_plugin.ApplicationCommand):
         #print(jobEdit)
         #jobView.insert(edit, 0, 'Hello')
         target_region = sublime.Region(pos, pos)
+        #jobView.sel().clear()
+        #jobView.sel().add(target_region)
         jobView.sel().clear()
-        jobView.sel().add(target_region)
-
+        jobView.sel().add(sublime.Region(jobView.text_point(pos-1, 0)))
         jobView.run_command("insert", {"pos":0,"characters":text})
         #jobView.end_edit(jobEdit)
 
