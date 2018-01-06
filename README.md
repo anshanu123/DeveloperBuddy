@@ -9,3 +9,11 @@ Amazon Alexa Skill to Assist in the generation of code. Currently supports Pytho
 ## Contact
 
 If you would like to make any comments or suggestions please feel free to email me at neeasthana@gmail.com
+
+## References 
+
+- https://daanlenaerts.com/blog/2015/06/03/create-a-simple-http-server-with-python-3/
+- http://docs.sublimetext.info/en/latest/extensibility/plugins.html
+- http://www.sublimetext.com/docs/plugin-examples
+- https://github.com/henrikpersson/rsub/blob/master/rsub.py
+- https://www.sublimetext.com/docs/3/api_reference.html#sublime.View
