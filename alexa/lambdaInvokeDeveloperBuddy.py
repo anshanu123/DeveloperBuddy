@@ -59,7 +59,7 @@ def get_welcome_response():
 
 def handle_session_end_request():
     card_title = "Session Ended"
-    speech_output = "Thank you for using at list. " \
+    speech_output = "Thank you for using develper buddy. " \
                     "Have a nice day! "
     # Setting this to true ends the session and exits the skill.
     should_end_session = True
@@ -137,6 +137,57 @@ def add_to_list(intent, session):
         card_title, speech_output, reprompt_text, should_end_session))
 
 
+
+def comment_line(intent, session):
+    """ 
+    Comments line in a sublime window. line_number is the input within intent
+    """
+
+    card_title = "Success"#intent['name']
+    session_attributes = {}
+    should_end_session = True
+
+    if 'line_number' in intent['slots']:
+        line_number = intent['slots']['line_number']['value']
+
+
+        populated_url = "http://34.201.91.109:8080/alexa"
+        post_params = {"command":"commentLine", "params": {"line":line_number}}
+         
+        # encode the parameters for Python's urllib
+        data = parse.urlencode(post_params).encode()
+        req = request.Request(populated_url)
+         
+        # add authentication header to request based on Account SID + Auth Token
+        # authentication = "{}:{}".format(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+        # base64string = base64.b64encode(authentication.encode('utf-8'))
+        # req.add_header("Authorization", "Basic %s" % base64string.decode('ascii'))
+        try:
+            # perform HTTP POST request
+            with request.urlopen(req, data) as f:
+                print("@List returned {}".format(str(f.read().decode('utf-8'))))
+        except Exception as e:
+            # something went wrong!
+            return e
+
+
+        session_attributes = increment_addition_counter()
+        speech_output = "Okay. I commented line " + \
+                        str(line_number) + \
+                        ". You can ask me to help write more code."
+        reprompt_text = " You can ask me to help write more code."
+
+    else:
+        speech_output = "I did not understand the line number you used. " + \
+                        "Please try again."
+        reprompt_text = "I did not understand the line number you used. " + \
+                        "You can tell me to comment a line by saying, " + \
+                        "comment line and then say the line number"
+    return build_response(session_attributes, build_speechlet_response(
+        card_title, speech_output, reprompt_text, should_end_session))
+
+
+
 def get_lists_from_tag(intent, session):
     session_attributes = {}
     reprompt_text = None
@@ -202,8 +253,8 @@ def on_intent(intent_request, session):
     intent_name = intent_request['intent']['name']
 
     # Dispatch to your skill's intent handlers
-    if intent_name == "AddToAtListIntent":
-        return add_to_list(intent, session)
+    if intent_name == "CommentLineIntent":
+        return comment_line(intent, session)
     elif intent_name == "AddToAtTagListIntent":
         return add_to_list(intent, session)
     elif intent_name == "AllListsFromTagIntent":
@@ -260,7 +311,7 @@ def lambda_handler(event, context):
 if __name__ == '__main__':
     intent = {
         "slots": {
-              "tag_name" : {"value":"phipsi"},
+              "line_number" : {"value":25},
               #"update_item": {"value":"smash raj"},
               #"list_name": {"value":"nicknames"}
             }
