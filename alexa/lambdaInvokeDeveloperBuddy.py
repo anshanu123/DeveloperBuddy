@@ -151,7 +151,7 @@ def comment_line(intent, session):
         line_number = intent['slots']['line_number']['value']
 
 
-        populated_url = "http://34.201.91.109:8080/alexa"
+        populated_url = "https://4a6aa2e2.ngrok.io"
         post_params = {"command":"commentLine", "params": {"line":line_number}}
          
         # encode the parameters for Python's urllib
