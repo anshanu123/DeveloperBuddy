@@ -5,6 +5,7 @@ Skill for Python Developer Buddy Application
 from __future__ import print_function
 import urllib
 from urllib import request, parse
+import json
 
 
 # --------------- Helpers that build all of the responses ----------------------
@@ -153,10 +154,12 @@ def comment_line(intent, session):
 
         populated_url = "https://4a6aa2e2.ngrok.io"
         post_params = {"command":"commentLine", "params": {"line":line_number}}
-         
+        print(json.dumps(post_params))
+        #encoded_json = parse.urlencode(json.dumps(post_params)).encode("utf-8")
+        encoded_json = (json.dumps(post_params)).encode("utf-8")
         # encode the parameters for Python's urllib
-        data = parse.urlencode(post_params).encode()
-        req = request.Request(populated_url)
+        #data = parse.urlencode(post_params).encode()
+        req = request.Request(populated_url, data = encoded_json)
          
         # add authentication header to request based on Account SID + Auth Token
         # authentication = "{}:{}".format(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
@@ -164,7 +167,7 @@ def comment_line(intent, session):
         # req.add_header("Authorization", "Basic %s" % base64string.decode('ascii'))
         try:
             # perform HTTP POST request
-            with request.urlopen(req, data) as f:
+            with request.urlopen(req) as f:
                 print("@List returned {}".format(str(f.read().decode('utf-8'))))
         except Exception as e:
             # something went wrong!
@@ -310,6 +313,7 @@ def lambda_handler(event, context):
 
 if __name__ == '__main__':
     intent = {
+        "name": "CommentLineIntent",
         "slots": {
               "line_number" : {"value":25},
               #"update_item": {"value":"smash raj"},
@@ -320,4 +324,4 @@ if __name__ == '__main__':
     #intent['slots']['update_item']['value'] = "from many to one"
     print(intent)
     #add_to_list(intent, {})
-    print(get_lists_from_tag(intent, {}))
+    print(comment_line(intent, {}))
