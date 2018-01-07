@@ -1,10 +1,5 @@
 """
-This sample demonstrates a simple skill built with the Amazon Alexa Skills Kit.
-The Intent Schema, Custom Slots, and Sample Utterances for this skill, as well
-as testing instructions are located at http://amzn.to/1LzFrj6
-
-For additional samples, visit the Alexa Skills Kit Getting Started guide at
-http://amzn.to/1LGWsLG
+Skill for Python Developer Buddy Application
 """
 
 from __future__ import print_function
@@ -52,13 +47,11 @@ def get_welcome_response():
 
     session_attributes = create_addition_counter()
     card_title = "Welcome"
-    speech_output = "Welcome to at list. " \
-                    "Please tell me what you would like to add to a list, " \
-                    "or to read off the names of your lists"
+    speech_output = "Welcome to developer buddy. " \
+                    "How can I help you write some code"
     # If the user either does not reply to the welcome message or says something
     # that is not understood, they will be prompted again with this text.
-    reprompt_text = "Please tell me what you would like to add to a list, " \
-                    "or to read off the names of your lists"
+    reprompt_text = "Please tell me how can I help you write some code"
     should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
