@@ -1,19 +1,14 @@
 import sublime, sublime_plugin
-from http.server import BaseHTTPRequestHandler, HTTPServer
+#from http.server import BaseHTTPRequestHandler, HTTPServer
 from threading import Thread
 import json
 #from flask import Flask, request, redirect
 
 #app = Flask(__name__)
 
-# kill server command
-class ExampleCommand(sublime_plugin.TextCommand):
-   def run(self, view):
-       unload_handler()
 
 
-
-def commentLineHandler(params):
+def commentLineHandler(params, printing = True):
     line = params["line"]
     jobView = sublime.active_window().active_view()
         
@@ -22,13 +17,34 @@ def commentLineHandler(params):
     jobView.sel().clear()
     jobView.sel().add(sublime.Region(jobView.text_point(line-1, 0)))
     jobView.run_command("insert", {"pos":0,"characters":"#"})
-    print("DeveloperBuddy: Commented line " + str(line))
+    if(printing):
+        print("DeveloperBuddy: Commented line " + str(line))
+
+def commentLinesHandler(params):
+    startLine = params["startLine"]
+    endLine = params["endLine"]
+    startLine = min(startLine, endLine)
+    endLine = max(startLine, endLine)
+    for line in range(startLine, endLine):
+        comment_line_handler_params = {"line":line}
+        commentLineHandler(comment_line_handler_params, printing = False)
+    print("DeveloperBuddy: Commented lines " + str(startLine) + " through " + str(endLine))
 
 
 
 processing_dict = {
-    "commentLine": {"params":["line"], "callback":commentLineHandler}
+    "commentLine": {"params":["line"], "callback":commentLineHandler},
+    "commentLines": {"params":["startLine", "endLine"], "callback":commentLinesHandler}
 }
+
+
+
+# kill server command
+class ExampleCommand(sublime_plugin.TextCommand):
+   def run(self, view):
+       unload_handler()
+
+
 
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
  
