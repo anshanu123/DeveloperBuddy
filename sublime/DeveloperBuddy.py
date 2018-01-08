@@ -6,30 +6,25 @@ import json
 
 #app = Flask(__name__)
 
+# kill server command
 class ExampleCommand(sublime_plugin.TextCommand):
    def run(self, view):
        unload_handler()
 
-class InsertingCommand(sublime_plugin.ApplicationCommand):
-    def run(self, pos, text):
-        print('got here')
-        jobView = sublime.active_window().active_view()
-        print(jobView)
-        #jobEdit = jobView.begin_edit()
-        #print(jobEdit)
-        #jobView.insert(edit, 0, 'Hello')
-        target_region = sublime.Region(pos, pos)
-        #jobView.sel().clear()
-        #jobView.sel().add(target_region)
-        jobView.sel().clear()
-        jobView.sel().add(sublime.Region(jobView.text_point(pos-1, 0)))
-        jobView.run_command("insert", {"pos":0,"characters":text})
-        #jobView.end_edit(jobEdit)
+
 
 def commentLineHandler(params):
-    sublime.run_command("inserting", {"pos":params["line"], "text": "#"})
-    print("done")
-    #sublime edit line
+    line = params["line"]
+    jobView = sublime.active_window().active_view()
+        
+    target_region = sublime.Region(line, line)
+
+    jobView.sel().clear()
+    jobView.sel().add(sublime.Region(jobView.text_point(line-1, 0)))
+    jobView.run_command("insert", {"pos":0,"characters":"#"})
+    print("DeveloperBuddy: Commented line " + str(line))
+
+
 
 processing_dict = {
     "commentLine": {"params":["line"], "callback":commentLineHandler}
