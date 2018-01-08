@@ -155,16 +155,8 @@ def comment_line(intent, session):
         populated_url = "https://4a6aa2e2.ngrok.io"
         post_params = {"command":"commentLine", "params": {"line":line_number}}
         print(json.dumps(post_params))
-        #encoded_json = parse.urlencode(json.dumps(post_params)).encode("utf-8")
         encoded_json = (json.dumps(post_params)).encode("utf-8")
-        # encode the parameters for Python's urllib
-        #data = parse.urlencode(post_params).encode()
         req = request.Request(populated_url, data = encoded_json)
-         
-        # add authentication header to request based on Account SID + Auth Token
-        # authentication = "{}:{}".format(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-        # base64string = base64.b64encode(authentication.encode('utf-8'))
-        # req.add_header("Authorization", "Basic %s" % base64string.decode('ascii'))
         try:
             # perform HTTP POST request
             with request.urlopen(req) as f:
@@ -186,6 +178,51 @@ def comment_line(intent, session):
         reprompt_text = "I did not understand the line number you used. " + \
                         "You can tell me to comment a line by saying, " + \
                         "comment line and then say the line number"
+    return build_response(session_attributes, build_speechlet_response(
+        card_title, speech_output, reprompt_text, should_end_session))
+
+
+
+def comment_lines(intent, session):
+    """ 
+    Comments lines in a sublime window. line_number_1 and line_number_2 are the inputs within intent
+    """
+
+    card_title = "Success"#intent['name']
+    session_attributes = {}
+    should_end_session = True
+
+    if 'line_number' in intent['slots']:
+        line_number_1 = intent['slots']['line_number_1']['value']
+        line_number_2 = intent['slots']['line_number_2']['value']
+
+
+        populated_url = "https://4a6aa2e2.ngrok.io"
+        post_params = {"command":"commentLine", "params": {"startLine":line_number_1, "endLine":line_number_2}}
+        print(json.dumps(post_params))
+        encoded_json = (json.dumps(post_params)).encode("utf-8")
+        req = request.Request(populated_url, data = encoded_json)
+        try:
+            # perform HTTP POST request
+            with request.urlopen(req) as f:
+                print("@List returned {}".format(str(f.read().decode('utf-8'))))
+        except Exception as e:
+            # something went wrong!
+            return e
+
+
+        session_attributes = increment_addition_counter()
+        speech_output = "Okay. I commented lines " + \
+                        str(line_number_1) + " to " + str(line_number_2) \
+                        ". You can ask me to help write more code."
+        reprompt_text = " You can ask me to help write more code."
+
+    else:
+        speech_output = "I did not understand the line numbers you used. " + \
+                        "Please try again."
+        reprompt_text = "I did not understand the line numbers you used. " + \
+                        "You can tell me to comment a line by saying, " + \
+                        "comment lines and then say the line numbers"
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
@@ -258,8 +295,8 @@ def on_intent(intent_request, session):
     # Dispatch to your skill's intent handlers
     if intent_name == "CommentLineIntent":
         return comment_line(intent, session)
-    elif intent_name == "AddToAtTagListIntent":
-        return add_to_list(intent, session)
+    elif intent_name == "CommentLinesIntent":
+        return comment_lines(intent, session)
     elif intent_name == "AllListsFromTagIntent":
         return get_lists_from_tag(intent, session)
     elif intent_name == "WhatsMyColorIntent":
