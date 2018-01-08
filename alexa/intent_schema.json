@@ -22,11 +22,11 @@
       "intent": "CommentLinesIntent",
       "slots": [
         {
-          "name": "line_number_1",
+          "name": "start_line",
           "type": "AMAZON.NUMBER"
         },
         {
-          "name": "line_number_2",
+          "name": "end_line",
           "type": "AMAZON.NUMBER"
         }
       ]
@@ -44,11 +44,11 @@
       "intent": "UncommentLinesIntent",
       "slots": [
         {
-          "name": "line_number_1",
+          "name": "start_line",
           "type": "AMAZON.NUMBER"
         },
         {
-          "name": "line_number_2",
+          "name": "end_line",
           "type": "AMAZON.NUMBER"
         }
       ]
@@ -66,11 +66,11 @@
       "intent": "DeleteLinesIntent",
       "slots": [
         {
-          "name": "line_number_1",
+          "name": "start_line",
           "type": "AMAZON.NUMBER"
         },
         {
-          "name": "line_number_2",
+          "name": "end_line",
           "type": "AMAZON.NUMBER"
         }
       ]

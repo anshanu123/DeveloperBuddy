@@ -193,12 +193,12 @@ def comment_lines(intent, session):
     should_end_session = True
 
     if 'line_number' in intent['slots']:
-        line_number_1 = intent['slots']['line_number_1']['value']
-        line_number_2 = intent['slots']['line_number_2']['value']
+        start_line = intent['slots']['start_line']['value']
+        end_line = intent['slots']['end_line']['value']
 
 
         populated_url = "https://4a6aa2e2.ngrok.io"
-        post_params = {"command":"commentLine", "params": {"startLine":line_number_1, "endLine":line_number_2}}
+        post_params = {"command":"commentLine", "params": {"startLine":start_line, "endLine":end_line}}
         print(json.dumps(post_params))
         encoded_json = (json.dumps(post_params)).encode("utf-8")
         req = request.Request(populated_url, data = encoded_json)

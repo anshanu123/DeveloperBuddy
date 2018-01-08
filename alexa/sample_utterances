@@ -9,24 +9,24 @@ OpenFileIntent open {modules|file_name} file
 
 CommentLineIntent comment line {line_number}
 CommentLineIntent please comment line {line_number}
-CommentLinesIntent comment lines {line_number_1} through {line_number_2}
-CommentLinesIntent please comment lines {line_number_1} through {line_number_2}
-CommentLinesIntent comment lines {line_number_1} to {line_number_2}
-CommentLinesIntent please comment lines {line_number_1} to {line_number_2}
-CommentLinesIntent comment between lines {line_number_1} and {line_number_2}
-CommentLinesIntent please comment between lines {line_number_1} and {line_number_2}
+CommentLinesIntent comment lines {start_line} through {end_line}
+CommentLinesIntent please comment lines {start_line} through {end_line}
+CommentLinesIntent comment lines {start_line} to {end_line}
+CommentLinesIntent please comment lines {start_line} to {end_line}
+CommentLinesIntent comment between lines {start_line} and {end_line}
+CommentLinesIntent please comment between lines {start_line} and {end_line}
 
 UncommentLineIntent uncomment line {line_number}
 UncommentLineIntent please uncomment line {line_number}
-UncommentLinesIntent uncomment lines {line_number_1} through {line_number_2}
-UncommentLinesIntent please uncomment lines {line_number_1} through {line_number_2}
-UncommentLinesIntent uncomment between lines {line_number_1} and {line_number_2}
-UncommentLinesIntent please uncomment between lines {line_number_1} and {line_number_2}
+UncommentLinesIntent uncomment lines {start_line} through {end_line}
+UncommentLinesIntent please uncomment lines {start_line} through {end_line}
+UncommentLinesIntent uncomment between lines {start_line} and {end_line}
+UncommentLinesIntent please uncomment between lines {start_line} and {end_line}
 
 DeleteLineIntent delete line {line_number}
 DeleteLineIntent please delete line {line_number}
-DeleteLinesIntent delete lines {line_number_1} through {line_number_2}
-DeleteLinesIntent please delete lines {line_number_1} through {line_number_2}
+DeleteLinesIntent delete lines {start_line} through {end_line}
+DeleteLinesIntent please delete lines {start_line} through {end_line}
 
 RedoIntent redo
 RedoIntent please redo
