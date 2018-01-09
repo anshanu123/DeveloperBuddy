@@ -149,7 +149,7 @@ def comment_line(intent, session):
     should_end_session = True
 
     if 'line_number' in intent['slots']:
-        line_number = intent['slots']['line_number']['value']
+        line_number = int(intent['slots']['line_number']['value'])
 
 
         populated_url = "https://4a6aa2e2.ngrok.io"
@@ -213,7 +213,7 @@ def comment_lines(intent, session):
 
         session_attributes = increment_addition_counter()
         speech_output = "Okay. I commented lines " + \
-                        str(line_number_1) + " to " + str(line_number_2) \
+                        str(line_number_1) + " to " + str(line_number_2) + \
                         ". You can ask me to help write more code."
         reprompt_text = " You can ask me to help write more code."
 
@@ -349,10 +349,11 @@ def lambda_handler(event, context):
         return on_session_ended(event['request'], event['session'])
 
 if __name__ == '__main__':
+    # get_welcome_response()
     intent = {
         "name": "CommentLineIntent",
         "slots": {
-              "line_number" : {"value":25},
+              "line_number" : {"value":365},
               #"update_item": {"value":"smash raj"},
               #"list_name": {"value":"nicknames"}
             }
