@@ -8,6 +8,20 @@ import json
 
 
 
+def goToLineHandler(params, printing = True):
+    line = params["line"] - 1
+    jobView = sublime.active_window().active_view()
+        
+    pt = jobView.text_point(line, 0)
+    jobView.sel().clear()
+    jobView.sel().add(sublime.Region(pt))
+    jobView.show(pt)
+
+    if(printing):
+        print("DeveloperBuddy: Go To line " + str(line))
+
+
+
 def commentLineHandler(params, printing = True):
     line = params["line"]
     jobView = sublime.active_window().active_view()
@@ -34,7 +48,8 @@ def commentLinesHandler(params):
 
 processing_dict = {
     "commentLine": {"params":["line"], "callback":commentLineHandler},
-    "commentLines": {"params":["startLine", "endLine"], "callback":commentLinesHandler}
+    "commentLines": {"params":["startLine", "endLine"], "callback":commentLinesHandler},
+    "goToLine": {"params":["line"], "callback": goToLineHandler}
 }
 
 
