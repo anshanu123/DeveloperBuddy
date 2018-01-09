@@ -30,7 +30,8 @@ def commentLineHandler(params, printing = True):
 
     jobView.sel().clear()
     jobView.sel().add(sublime.Region(jobView.text_point(line-1, 0)))
-    jobView.run_command("insert", {"pos":0,"characters":"#"})
+    #jobView.run_command("insert", {"pos":0,"characters":"#"})
+    jobView.run_command("toggle_comment", {"block":False})
     if(printing):
         print("DeveloperBuddy: Commented line " + str(line))
 
