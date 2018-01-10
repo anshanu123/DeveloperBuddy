@@ -138,6 +138,39 @@ def add_to_list(intent, session):
         card_title, speech_output, reprompt_text, should_end_session))
 
 
+def post_data(params):
+    populated_url = "https://4a6aa2e2.ngrok.io"
+    
+    encoded_json = (json.dumps(params)).encode("utf-8")
+    req = request.Request(populated_url, data = encoded_json)
+    try:
+        # perform HTTP POST request
+        with request.urlopen(req) as f:
+            return "Sublime Returned: {}".format(str(f.read().decode('utf-8')))
+    except Exception as e:
+        # something went wrong!
+        return e
+
+
+
+
+def find_all_selected(intent, session):
+    card_title = "Success"#intent['name']
+    session_attributes = {}
+    should_end_session = True
+
+    post_params = {"command":"findAllSelected", "params": {}}
+    post_data(post_params)
+
+    session_attributes = increment_addition_counter()
+    speech_output = "Okay. I found all occurrences" + \
+                        ". You can ask me to help write more code."
+    reprompt_text = " You can ask me to help write more code."
+
+    return build_response(session_attributes, build_speechlet_response(
+        card_title, speech_output, reprompt_text, should_end_session))
+
+
 
 def comment_line(intent, session):
     """ 
@@ -151,20 +184,8 @@ def comment_line(intent, session):
     if 'line_number' in intent['slots']:
         line_number = int(intent['slots']['line_number']['value'])
 
-
-        populated_url = "https://4a6aa2e2.ngrok.io"
         post_params = {"command":"commentLine", "params": {"line":line_number}}
-        print(json.dumps(post_params))
-        encoded_json = (json.dumps(post_params)).encode("utf-8")
-        req = request.Request(populated_url, data = encoded_json)
-        try:
-            # perform HTTP POST request
-            with request.urlopen(req) as f:
-                print("@List returned {}".format(str(f.read().decode('utf-8'))))
-        except Exception as e:
-            # something went wrong!
-            return e
-
+        post_data(post_params)
 
         session_attributes = increment_addition_counter()
         speech_output = "Okay. I commented line " + \
@@ -299,8 +320,8 @@ def on_intent(intent_request, session):
         return comment_lines(intent, session)
     elif intent_name == "AllListsFromTagIntent":
         return get_lists_from_tag(intent, session)
-    elif intent_name == "WhatsMyColorIntent":
-        return get_color_from_session(intent, session)
+    elif intent_name == "FindAllSelectedIntent":
+        return find_all_selected(intent, session)
     elif intent_name == "AMAZON.HelpIntent":
         return get_welcome_response()
     elif intent_name == "AMAZON.CancelIntent" or intent_name == "AMAZON.StopIntent":
@@ -351,7 +372,8 @@ def lambda_handler(event, context):
 if __name__ == '__main__':
     # get_welcome_response()
     intent = {
-        "name": "CommentLineIntent",
+        #"name": "CommentLineIntent",
+        "name": "FindAllSelectedIntent",
         "slots": {
               "line_number" : {"value":365},
               #"update_item": {"value":"smash raj"},
@@ -362,4 +384,5 @@ if __name__ == '__main__':
     #intent['slots']['update_item']['value'] = "from many to one"
     print(intent)
     #add_to_list(intent, {})
-    print(comment_line(intent, {}))
+    # print(comment_line(intent, {}))
+    find_all_selected(intent, {})
