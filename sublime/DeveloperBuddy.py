@@ -50,7 +50,8 @@ def commentLinesHandler(params):
 processing_dict = {
     "commentLine": {"params":["line"], "callback":commentLineHandler},
     "commentLines": {"params":["startLine", "endLine"], "callback":commentLinesHandler},
-    "goToLine": {"params":["line"], "callback": goToLineHandler}
+    "goToLine": {"params":["line"], "callback": goToLineHandler},
+    "findAllSelected": {"params":[], "callback": "find_all_under"}
 }
 
 
@@ -88,7 +89,11 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         params = data["params"]
         
         processing_entry = processing_dict[command]
-        callback = processing_entry["callback"](params)
+        if isinstance(processing_entry["callback"],str):
+            window = sublime.active_window()
+            window.run_command(processing_entry["callback"])
+        else:
+            callback = processing_entry["callback"](params)
 
         # response        
         self.send_response(200)
