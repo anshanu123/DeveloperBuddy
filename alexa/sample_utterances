@@ -28,8 +28,13 @@ DeleteLineIntent please delete line {line_number}
 DeleteLinesIntent delete lines {start_line} through {end_line}
 DeleteLinesIntent please delete lines {start_line} through {end_line}
 
+FindAllSelectedIntent find all
+FindAllSelectedIntent find all in my file
+FindAllSelectedIntent find all times this is used
+FindAllSelectedIntent find all occurrences of my selection
+FindAllSelectedIntent find other times this selection is used
+
 RedoIntent redo
 RedoIntent please redo
 
 UndoIntent undo
-UndoIntent please undo

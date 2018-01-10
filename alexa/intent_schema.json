@@ -54,6 +54,9 @@
       ]
     },
     {
+      "intent": "FindAllSelectedIntent"
+    },
+    {
       "intent": "DeleteLineIntent",
       "slots": [
         {
