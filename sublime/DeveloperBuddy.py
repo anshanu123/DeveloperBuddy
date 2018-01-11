@@ -1,10 +1,6 @@
 import sublime, sublime_plugin
-#from http.server import BaseHTTPRequestHandler, HTTPServer
 from threading import Thread
 import json
-#from flask import Flask, request, redirect
-
-#app = Flask(__name__)
 
 
 
