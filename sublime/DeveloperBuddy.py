@@ -6,12 +6,12 @@ import json
 
 def goToLineHandler(params, printing = True):
     line = params["line"] - 1
-    jobView = sublime.active_window().active_view()
+    job_view = sublime.active_window().active_view()
         
-    pt = jobView.text_point(line, 0)
-    jobView.sel().clear()
-    jobView.sel().add(sublime.Region(pt))
-    jobView.show(pt)
+    pt = job_view.text_point(line, 0)
+    job_view.sel().clear()
+    job_view.sel().add(sublime.Region(pt))
+    job_view.show(pt)
 
     if(printing):
         print("DeveloperBuddy: Go To line " + str(line))
@@ -20,14 +20,14 @@ def goToLineHandler(params, printing = True):
 
 def commentLineHandler(params, printing = True):
     line = params["line"]
-    jobView = sublime.active_window().active_view()
+    job_view = sublime.active_window().active_view()
         
     target_region = sublime.Region(line, line)
 
-    jobView.sel().clear()
-    jobView.sel().add(sublime.Region(jobView.text_point(line-1, 0)))
-    #jobView.run_command("insert", {"pos":0,"characters":"#"})
-    jobView.run_command("toggle_comment", {"block":False})
+    job_view.sel().clear()
+    job_view.sel().add(sublime.Region(job_view.text_point(line-1, 0)))
+    #job_view.run_command("insert", {"pos":0,"characters":"#"})
+    job_view.run_command("toggle_comment", {"block":False})
     if(printing):
         print("DeveloperBuddy: Commented line " + str(line))
 
