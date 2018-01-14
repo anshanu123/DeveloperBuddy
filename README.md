@@ -4,6 +4,7 @@ Amazon Alexa Skill to Assist in the generation of code. Currently supports Pytho
 ## Possible Queries
 - **Alexa, comment line <line_number>**
 - **Alexa delete line <line_number>**
+- **Alexa select line <line_number>**
 - **Alexa help**
 
 ## Contact
