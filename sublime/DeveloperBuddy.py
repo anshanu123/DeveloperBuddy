@@ -18,6 +18,16 @@ def goToLineHandler(params, printing = True):
 
 
 
+def select_line(params, printing=True):
+    line = params["line"] - 1
+
+    job_view = sublime.active_window().active_view()
+    line_start = job_view.text_point(line,0)
+    line = job_view.line(sublime.Region(line_start))
+    job_view.sel().add(sublime.Region(line))
+
+
+
 def commentLineHandler(params, printing = True):
     line = params["line"]
     job_view = sublime.active_window().active_view()
