@@ -24,7 +24,7 @@ def select_line(params, printing=True):
     job_view = sublime.active_window().active_view()
     line_start = job_view.text_point(line,0)
     line = job_view.line(sublime.Region(line_start))
-    job_view.sel().add(sublime.Region(line))
+    job_view.sel().add(line)
 
 
 
@@ -57,6 +57,7 @@ processing_dict = {
     "commentLine": {"params":["line"], "callback":commentLineHandler},
     "commentLines": {"params":["startLine", "endLine"], "callback":commentLinesHandler},
     "goToLine": {"params":["line"], "callback": goToLineHandler},
+    "select_line": {"params":["line"], "callback": select_line},
     "findAllSelected": {"params":[], "callback": "find_all_under"}
 }
 
