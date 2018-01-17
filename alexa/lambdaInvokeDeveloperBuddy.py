@@ -153,6 +153,27 @@ def post_data(params):
 
 
 
+def select_line(intent, session):
+    card_title = "Success"#intent['name']
+    session_attributes = {}
+    should_end_session = True
+
+    if 'line_number' in intent['slots']:
+        line_number = int(intent['slots']['line_number']['value'])
+
+        post_params = {"command":"select_line", "params": {"line":line_number}}
+        post_data(post_params)
+
+        session_attributes = increment_addition_counter()
+        speech_output = "Okay. I selected line " + str(line_number) + \
+                            ". You can ask me to help write more code."
+        reprompt_text = " You can ask me to help write more code."
+
+    return build_response(session_attributes, build_speechlet_response(
+        card_title, speech_output, reprompt_text, should_end_session))
+
+
+
 
 def find_all_selected(intent, session):
     card_title = "Success"#intent['name']
@@ -322,6 +343,8 @@ def on_intent(intent_request, session):
         return get_lists_from_tag(intent, session)
     elif intent_name == "FindAllSelectedIntent":
         return find_all_selected(intent, session)
+    elif intent_name == "SelectLineIntent":
+        return select_line(intent, session)
     elif intent_name == "AMAZON.HelpIntent":
         return get_welcome_response()
     elif intent_name == "AMAZON.CancelIntent" or intent_name == "AMAZON.StopIntent":

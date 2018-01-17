@@ -54,6 +54,28 @@
       ]
     },
     {
+      "intent": "SelectLineIntent",
+      "slots": [
+        {
+          "name": "line_number",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "SelectLinesIntent",
+      "slots": [
+        {
+          "name": "start_line",
+          "type": "AMAZON.NUMBER"
+        },
+        {
+          "name": "end_line",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
       "intent": "FindAllSelectedIntent"
     },
     {

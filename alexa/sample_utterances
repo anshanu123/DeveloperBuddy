@@ -23,6 +23,17 @@ UncommentLinesIntent please uncomment lines {start_line} through {end_line}
 UncommentLinesIntent uncomment between lines {start_line} and {end_line}
 UncommentLinesIntent please uncomment between lines {start_line} and {end_line}
 
+SelectLineIntent select line {line_number}
+SelectLineIntent please select line {line_number}
+SelectLinesIntent select lines {start_line} through {end_line}
+SelectLinesIntent please select lines {start_line} through {end_line}
+SelectLinesIntent select lines {start_line} to {end_line}
+SelectLinesIntent select line {start_line} to line {end_line}
+SelectLinesIntent please select lines {start_line} to {end_line}
+SelectLinesIntent please select line {start_line} to line {end_line}
+SelectLinesIntent select between lines {start_line} and {end_line}
+SelectLinesIntent please select between lines {start_line} and {end_line}
+
 DeleteLineIntent delete line {line_number}
 DeleteLineIntent please delete line {line_number}
 DeleteLinesIntent delete lines {start_line} through {end_line}
