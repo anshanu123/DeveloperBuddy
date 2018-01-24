@@ -58,7 +58,8 @@ processing_dict = {
     "commentLines": {"params":["startLine", "endLine"], "callback":commentLinesHandler},
     "goToLine": {"params":["line"], "callback": goToLineHandler},
     "select_line": {"params":["line"], "callback": select_line},
-    "findAllSelected": {"params":[], "callback": "find_all_under"}
+    "findAllSelected": {"params":[], "callback": "find_all_under", "view": False},
+    "undo": {"params":[], "callback": "undo", "view": True}
 }
 
 
@@ -97,6 +98,10 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         
         processing_entry = processing_dict[command]
         if isinstance(processing_entry["callback"],str):
+            if(processing_entry["view"]):
+                job_view = sublime.active_window().active_view()
+                job_view.run_command(processing_entry["callback"])
+            else:
             window = sublime.active_window()
             window.run_command(processing_entry["callback"])
         else:
