@@ -59,7 +59,8 @@ processing_dict = {
     "goToLine": {"params":["line"], "callback": goToLineHandler},
     "select_line": {"params":["line"], "callback": select_line},
     "findAllSelected": {"params":[], "callback": "find_all_under", "view": False},
-    "undo": {"params":[], "callback": "undo", "view": True}
+    "undo": {"params":[], "callback": "undo", "view": True},
+    "redo": {"params":[], "callback": "redo_or_repeat", "view": True}
 }
 
 
@@ -102,8 +103,8 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                 job_view = sublime.active_window().active_view()
                 job_view.run_command(processing_entry["callback"])
             else:
-            window = sublime.active_window()
-            window.run_command(processing_entry["callback"])
+                window = sublime.active_window()
+                window.run_command(processing_entry["callback"])
         else:
             callback = processing_entry["callback"](params)
 
