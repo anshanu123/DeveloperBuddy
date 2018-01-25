@@ -4,7 +4,7 @@ import json
 
 
 
-def goToLineHandler(params, printing = True):
+def go_to_line_handler(params, printing = True):
     line = params["line"] - 1
     job_view = sublime.active_window().active_view()
         
@@ -28,7 +28,7 @@ def select_line(params, printing=True):
 
 
 
-def commentLineHandler(params, printing = True):
+def comment_line_handler(params, printing = True):
     line = params["line"]
     job_view = sublime.active_window().active_view()
         
@@ -41,22 +41,22 @@ def commentLineHandler(params, printing = True):
     if(printing):
         print("DeveloperBuddy: Commented line " + str(line))
 
-def commentLinesHandler(params):
+def comment_lines_handler(params):
     startLine = params["startLine"]
     endLine = params["endLine"]
     startLine = min(startLine, endLine)
     endLine = max(startLine, endLine)
     for line in range(startLine, endLine):
         comment_line_handler_params = {"line":line}
-        commentLineHandler(comment_line_handler_params, printing = False)
+        comment_line_handler(comment_line_handler_params, printing = False)
     print("DeveloperBuddy: Commented lines " + str(startLine) + " through " + str(endLine))
 
 
 
 processing_dict = {
-    "commentLine": {"params":["line"], "callback":commentLineHandler},
-    "commentLines": {"params":["startLine", "endLine"], "callback":commentLinesHandler},
-    "goToLine": {"params":["line"], "callback": goToLineHandler},
+    "commentLine": {"params":["line"], "callback":comment_line_handler},
+    "commentLines": {"params":["startLine", "endLine"], "callback":comment_lines_handler},
+    "goToLine": {"params":["line"], "callback": go_to_line_handler},
     "select_line": {"params":["line"], "callback": select_line},
     "findAllSelected": {"params":[], "callback": "find_all_under", "view": False},
     "undo": {"params":[], "callback": "undo", "view": True},
