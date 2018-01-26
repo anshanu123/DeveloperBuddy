@@ -25,6 +25,8 @@ def select_line(params, printing=True):
     line_start = job_view.text_point(line,0)
     line = job_view.line(sublime.Region(line_start))
     job_view.sel().add(line)
+    if(printing):
+        print("DeveloperBuddy: Selected line " + str(line))
 
 
 
