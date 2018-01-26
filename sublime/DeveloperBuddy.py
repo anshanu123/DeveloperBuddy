@@ -60,7 +60,8 @@ processing_dict = {
     "select_line": {"params":["line"], "callback": select_line},
     "findAllSelected": {"params":[], "callback": "find_all_under", "view": False},
     "undo": {"params":[], "callback": "undo", "view": True},
-    "redo": {"params":[], "callback": "redo_or_repeat", "view": True}
+    "redo": {"params":[], "callback": "redo_or_repeat", "view": True,
+    "delete_selected_lines": {"params": [], "callback": "left_delete", "view": True}
 }
 
 
