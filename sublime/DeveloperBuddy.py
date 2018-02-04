@@ -105,9 +105,11 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             if(processing_entry["view"]):
                 job_view = sublime.active_window().active_view()
                 job_view.run_command(processing_entry["callback"])
+                print("DeveloperBuddy: Executed Sublime " + processing_entry["callback"] + " View command")
             else:
                 window = sublime.active_window()
                 window.run_command(processing_entry["callback"])
+                print("DeveloperBuddy: Executed Sublime " + processing_entry["callback"] + " Window command")
         else:
             callback = processing_entry["callback"](params)
 
