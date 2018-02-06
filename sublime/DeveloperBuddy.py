@@ -62,6 +62,13 @@ def undo_multiple(params, printing = True):
         job_view.run_command("undo")
 
 
+def redo_multiple(params, printing = True):
+    number = params["number"]
+    job_view = sublime.active_window().active_view()
+    for i in range(number):
+        job_view.run_command("redo_or_repeat")
+
+
 
 processing_dict = {
     "commentLine": {"params":["line"], "callback":comment_line_handler},
