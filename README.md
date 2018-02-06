@@ -8,6 +8,7 @@ Amazon Alexa Skill to Assist in the generation of code. Currently supports Pytho
 - **Alexa please select lines <line_number_1> through <line_number_2>**
 - **Alexa (un)comment line <line_number>**
 - **Alexa (un)comment lines <line_number_1> to <line_number_2>**
+- **Alexa redo/undo**
 - **Alexa help**
 
 ## Contact
