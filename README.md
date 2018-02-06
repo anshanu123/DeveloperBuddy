@@ -1,10 +1,13 @@
 # DeveloperBuddy
 Amazon Alexa Skill to Assist in the generation of code. Currently supports Python only. Eventual support for Java, Ruby, Javascript in that order. 
 
-## Possible Queries
-- **Alexa, comment line <line_number>**
+## Possible out-of-box Queries
+- **Alexa please comment lines <line_number_1> through <line_number_2>**
 - **Alexa delete line <line_number>**
 - **Alexa select line <line_number>**
+- **Alexa please select lines <line_number_1> through <line_number_2>**
+- **Alexa (un)comment line <line_number>**
+- **Alexa (un)comment lines <line_number_1> to <line_number_2>**
 - **Alexa help**
 
 ## Contact
