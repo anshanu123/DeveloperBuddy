@@ -2,6 +2,7 @@
 Amazon Alexa Skill to Assist in the generation of code. Currently supports Python only. Eventual support for Java, Ruby, Javascript in that order. 
 
 ## Possible out-of-box Queries
+
 - **Alexa please comment lines <line_number_1> through <line_number_2>**
 - **Alexa delete line <line_number>**
 - **Alexa select line <line_number>**
@@ -10,6 +11,15 @@ Amazon Alexa Skill to Assist in the generation of code. Currently supports Pytho
 - **Alexa (un)comment lines <line_number_1> to <line_number_2>**
 - **Alexa redo/undo**
 - **Alexa help**
+
+## Adding an sublime existing command
+
+Steps:
+1. Write a sublime command is a single function
+1. Create an intent schema and some sample utterances
+1. Add them via the add_custom_command function
+	- params: sublime_function (string as python code), intent schemas (as an array of strings), sample utterances (as an array of strings)
+	- `sublime.view.run_command("add_custom_command", "args";{"sublime_function":..., "intent_schemas":[...], "sample_utterances":[...]})`
 
 ## Contact
 
