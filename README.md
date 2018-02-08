@@ -21,6 +21,18 @@ Steps:
 	- params: sublime_function (string as python code), intent schemas (as an array of strings), sample utterances (as an array of strings)
 	- `sublime.view.run_command("add_custom_command", "args";{"sublime_function":..., "intent_schemas":[...], "sample_utterances":[...]})`
 
+## Additional Features to Add
+**When I have time...**
+- Errors and Usage statistics for each command (improve usage)
+- Triggers... Look for a pattern and predict usage of command execution
+- Suggestions - Can we suggest that you use a command based on the context?
+- Custom Commands that can be added from a website online
+- Top of List and Featured List- can we list the top used commands on our platform for download?
+- Website for easily activating commands
+- Priviledged Commands - pay to use certain commands or exclusive access
+- File structure creation for coding classes through Alexa command
+- Local Database or Cache to try out new commands from Alexa
+
 ## Contact
 
 If you would like to make any comments or suggestions please feel free to email me at neeasthana@gmail.com
