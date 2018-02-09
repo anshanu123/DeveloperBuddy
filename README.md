@@ -32,6 +32,7 @@ Steps:
 - Priviledged Commands - pay to use certain commands or exclusive access
 - File structure creation for coding classes through Alexa command
 - Local Database or Cache to try out new commands from Alexa
+- "Whats the shortcut for that?" feature
 
 ## Contact
 
