@@ -72,7 +72,7 @@ processing_dict = {
     "redo": {"params":[], "callback": "redo_or_repeat", "view": True},
     
     "undo_multiple": {"params":["number"], "plugin": True, "callback": """def undo_multiple(printing = True):
-    number = {{number}}
+    number = 2
     job_view = sublime.active_window().active_view()
     for i in range(number):
         job_view.run_command("undo")
@@ -121,7 +121,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         if processing_entry["plugin"]:
             function = mustache_function_with_params(processing_entry, params)
             invoke_function  = function + "\n\n" + command +"()"
-            eval(invoke_function)
+            exec(invoke_function)
 
         elif isinstance(processing_entry["callback"],str):
             if(processing_entry["view"]):
