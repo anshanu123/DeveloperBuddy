@@ -71,11 +71,11 @@ def redo_multiple(params, printing = True):
 
 
 processing_dict = {
-    "commentLine": {"params":["line"], "callback":comment_line_handler},
-    "commentLines": {"params":["startLine", "endLine"], "callback":comment_lines_handler},
-    "goToLine": {"params":["line"], "callback": go_to_line_handler},
+    "comment_line": {"params":["line"], "callback":comment_line_handler},
+    "comment_lines": {"params":["startLine", "endLine"], "callback":comment_lines_handler},
+    "go_to_line": {"params":["line"], "callback": go_to_line_handler},
     "select_line": {"params":["line"], "callback": select_line},
-    "findAllSelected": {"params":[], "callback": "find_all_under", "view": False},
+    "find_all_selected": {"params":[], "callback": "find_all_under", "view": False},
     "undo": {"params":[], "callback": "undo", "view": True},
     "redo": {"params":[], "callback": "redo_or_repeat", "view": True},
     "undo_multiple": {"params":["number"], "callback": undo_multiple},
