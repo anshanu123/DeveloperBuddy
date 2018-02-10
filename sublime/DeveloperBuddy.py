@@ -71,7 +71,7 @@ processing_dict = {
     "undo": {"params":[], "callback": "undo", "view": True},
     "redo": {"params":[], "callback": "redo_or_repeat", "view": True},
     
-    "undo_multiple": {"params":["number"], "callback": """def undo_multiple(printing = True):
+    "undo_multiple": {"params":["number"], "plugin": True, "callback": """def undo_multiple(printing = True):
     number = {{number}}
     job_view = sublime.active_window().active_view()
     for i in range(number):
@@ -116,9 +116,14 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         data = json.loads(post_data.decode("utf-8"))
         command = data["command"]
         params = data["params"]
-        
+
         processing_entry = processing_dict[command]
-        if isinstance(processing_entry["callback"],str):
+        if processing_entry["plugin"]:
+            function = mustache_function_with_params(processing_entry, params)
+            invoke_function  = function + "\n\n" + command +"()"
+            eval(invoke_function)
+
+        elif isinstance(processing_entry["callback"],str):
             if(processing_entry["view"]):
                 job_view = sublime.active_window().active_view()
                 job_view.run_command(processing_entry["callback"])
@@ -136,6 +141,11 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(bytes("done", "utf8"))
         return
+
+
+def mustache_function_with_params(processing_entry, params):
+    return processing_entry["callback"]
+
 
 
 def start_server():
