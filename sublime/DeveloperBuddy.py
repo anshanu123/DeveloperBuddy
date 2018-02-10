@@ -54,14 +54,6 @@ def comment_lines_handler(params):
     print("DeveloperBuddy: Commented lines " + str(startLine) + " through " + str(endLine))
 
 
-
-def undo_multiple(params, printing = True):
-    number = params["number"]
-    job_view = sublime.active_window().active_view()
-    for i in range(number):
-        job_view.run_command("undo")
-
-
 def redo_multiple(params, printing = True):
     number = params["number"]
     job_view = sublime.active_window().active_view()
@@ -78,7 +70,14 @@ processing_dict = {
     "find_all_selected": {"params":[], "callback": "find_all_under", "view": False},
     "undo": {"params":[], "callback": "undo", "view": True},
     "redo": {"params":[], "callback": "redo_or_repeat", "view": True},
-    "undo_multiple": {"params":["number"], "callback": undo_multiple},
+    
+    "undo_multiple": {"params":["number"], "callback": """def undo_multiple(printing = True):
+    number = {{number}}
+    job_view = sublime.active_window().active_view()
+    for i in range(number):
+        job_view.run_command("undo")
+    print("Developer Buddy: Ran undo " + str(number) + " times") """},
+
     "redo_multiple": {"params":["number"], "callback": redo_multiple},
     "delete_selected_lines": {"params": [], "callback": "left_delete", "view": True}
 }
