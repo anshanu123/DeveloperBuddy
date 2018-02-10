@@ -76,7 +76,8 @@ processing_dict = {
     job_view = sublime.active_window().active_view()
     for i in range(number):
         job_view.run_command("undo")
-    print("Developer Buddy: Ran undo " + str(number) + " times") """},
+    if printing:
+        print("Developer Buddy: Ran undo " + str(number) + " times") """},
 
     "redo_multiple": {"params":["number"], "callback": redo_multiple},
     "delete_selected_lines": {"params": [], "callback": "left_delete", "view": True}
