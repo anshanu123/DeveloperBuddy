@@ -71,8 +71,7 @@ processing_dict = {
     "undo": {"params":[], "callback": "undo", "view": True},
     "redo": {"params":[], "callback": "redo_or_repeat", "view": True},
     
-    "undo_multiple": {"params":["number"], "plugin": True, "callback": """def undo_multiple(printing = True):
-    number = 2
+    "undo_multiple": {"params":["number"], "plugin": True, "callback": """def undo_multiple(number, printing = True):
     job_view = sublime.active_window().active_view()
     for i in range(number):
         job_view.run_command("undo")
@@ -120,7 +119,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         processing_entry = processing_dict[command]
         if processing_entry["plugin"]:
             if (validate_params(processing_entry, params)):
-                function = mustache_function_with_params(processing_entry, params)
+                function = add_params_to_function(processing_entry, params)
             else:
                 print("error validating the parameters")
             invoke_function  = function + "\n\n" + command +"()"
@@ -158,8 +157,12 @@ def validate_params(processing_entry, params):
 
 
 
-def mustache_function_with_params(processing_entry, params):
-    return processing_entry["callback"]
+def add_params_to_function(processing_entry, params):
+    function = processing_entry["callback"]
+    param_string = ""
+    for param in processing_entry["params"]:
+        param_string = param_string + param + " = " + params[param]
+    return param_string + "\n" + function
 
 
 
