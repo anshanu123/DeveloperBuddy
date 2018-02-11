@@ -119,7 +119,10 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
         processing_entry = processing_dict[command]
         if processing_entry["plugin"]:
-            function = mustache_function_with_params(processing_entry, params)
+            if (validate_params(processing_entry, params)):
+                function = mustache_function_with_params(processing_entry, params)
+            else:
+                print("error validating the parameters")
             invoke_function  = function + "\n\n" + command +"()"
             exec(invoke_function)
 
@@ -141,6 +144,18 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(bytes("done", "utf8"))
         return
+
+
+
+def validate_params(processing_entry, params):
+    needed_params = processing_entry["params"]
+    for param in needed_params:
+        if param not in params.keys():
+            return False
+    if len(processing_entry["params"]) > len(params):
+        return False
+    return True
+
 
 
 def mustache_function_with_params(processing_entry, params):
