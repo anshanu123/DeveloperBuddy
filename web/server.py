@@ -9,9 +9,11 @@ def add_to_database():
     Needs many parameters including: intent_schema, function, sample_utterances, params, etc."""
     function_code = request.form['function']
     params = request.form['params']
-    # add more params here... 
-    # submit to database
 
+    # add more params here... 
+    # process
+    # submit to database
+    # send response of successful or failure of addition
 
     """if not list_name or list_name is None or list_name is "":
         list_name = tag_name
@@ -26,6 +28,8 @@ def add_to_database():
 def get_entry():
     """gets a custom entry from the backend store based on the provided intent_name"""
     intent_name = request.args.get('intent_name')
+    # get from data with intent_name as key
+    # return
 
     return str(intent_name)
 
@@ -35,6 +39,9 @@ def get_entry():
 def process_intent():
     """processes intent from lambda functions and sends formatted request with function and params to sublime plugin"""
     intent_name = request.args.get('intent_name')
+    # get params
+    #send details through rest to the sublime plugin
+    #get and process response from sublime plugin for alexa (returned)
 
     return str(intent_name)
 
