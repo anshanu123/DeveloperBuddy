@@ -5,7 +5,8 @@ from flask import Flask, request, redirect
 
 @app.route('/add_to_database', methods=['POST'])
 def add_to_database():
-    """processing handle for alexa app"""
+    """adds a Developer Buddy custom plugin to the backend store
+    Needs many parameters including: intent_schema, function, sample_utterances, params, etc."""
     function_code = request.form['function']
     params = request.form['params']
     # add more params here... 
@@ -23,7 +24,7 @@ def add_to_database():
 
 @app.route('/get_entry', methods=['GET'])
 def get_entry():
-    """processing handling for alexa AllListsFromTagIntent intent"""
+    """gets a custom entry from the backend store based on the provided intent_name"""
     intent_name = request.args.get('intent_name')
 
     return str(intent_name)
@@ -32,7 +33,7 @@ def get_entry():
 
 @app.route('/process_intent', methods=['GET'])
 def process_intent():
-    """processing handling for alexa AllListsFromTagIntent intent"""
+    """processes intent from lambda functions and sends formatted request with function and params to sublime plugin"""
     intent_name = request.args.get('intent_name')
 
     return str(intent_name)
