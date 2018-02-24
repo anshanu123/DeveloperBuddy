@@ -1,6 +1,4 @@
-import sys
-print(sys.version)
-
+from http.server import BaseHTTPRequestHandler, HTTPServer
 import sublime, sublime_plugin
 from threading import Thread
 import json
