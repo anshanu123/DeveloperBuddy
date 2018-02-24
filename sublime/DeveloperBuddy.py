@@ -1,6 +1,10 @@
+import sys
+print(sys.version)
+
 import sublime, sublime_plugin
 from threading import Thread
 import json
+#from BaseHTTPServer import BaseHTTPRequestHandler
 
 
 
@@ -89,6 +93,17 @@ processing_dict = {
 class ExampleCommand(sublime_plugin.TextCommand):
    def run(self, view):
        unload_handler()
+
+
+
+class AddCustomPluginCommand(sublime_plugin.TextCommand):
+   def run(self, view, args):
+       name = args["function_name"]
+       function = args["sublime_function"]
+
+       processing_dict[name] = {"params": [], "callback": function}
+
+       print("DeveloperBuddy: Added Custom Plugin: " + name)
 
 
 
