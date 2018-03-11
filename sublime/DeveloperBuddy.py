@@ -161,6 +161,12 @@ def unload_handler():
         server.shutdown()
         server.server_close()
 
+username = None
+
+def on_done_username(input_username):
+    username = input_username
+    print(username)
+
 def plugin_loaded():
     """Called at the start of the sublime plugin"""
     global server
@@ -177,6 +183,10 @@ def plugin_loaded():
     print('Running DeveloperBuddy Server on port 8081')
     Thread(target=start_server, args=[]).start()
     #httpd.serve_forever()
+
+    # Ask for username to know what to connect to and code
+    window = sublime.active_window()
+    window.show_input_panel("What is your username?", "something", on_done_username, None, None)
 
     """global SESSIONS, server
 
