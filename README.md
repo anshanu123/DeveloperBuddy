@@ -1,5 +1,6 @@
+Developer Buddy an amzaing project
 # DeveloperBuddy
-Amazon Alexa Skill to Assist in the generation of code. Currently supports Python only. Eventual support for Java, Ruby, Javascript in that order. 
+Amazon Alexa Skill Assist in the generation of code. Currently supports Python only. Eventual support for Java, Ruby, Javascript in that order. 
 
 ## Possible out-of-box Queries
 
